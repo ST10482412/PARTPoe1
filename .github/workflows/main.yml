@@ -1,0 +1,39 @@
+[Start]
+   ↓
+[Initialize System]
+   ↓
+[Play Voice + Show Logo]
+   ↓
+[Enter User Name]
+   ↓
+{Is Name Empty?}
+   ├── Yes → [Set Name = "User"]
+   └── No  → [Use Entered Name]
+   ↓
+[Welcome User]
+   ↓
+[Show Example Questions]
+   ↓
+[Enter Chatbot]
+   ↓
+ ┌───────────────────────────────┐
+ │        CHAT LOOP              │
+ │                               │
+ │  [Ask for Input]              │
+ │        ↓                      │
+ │  {Input Empty?}               │
+ │   ├─ Yes → "Try again"        │
+ │   └─ No                       │
+ │        ↓                      │
+ │  {Recognized Keyword?}        │
+ │   ├─ Yes → Give Answer        │
+ │   └─ No  → Default Response   │
+ │        ↓                      │
+ │  {User typed "exit"?}         │
+ │   ├─ No → Repeat Loop         │
+ │   └─ Yes → Exit Loop          │
+ └───────────────────────────────┘
+   ↓
+[Goodbye Message]
+   ↓
+[End]
