@@ -1,39 +1,31 @@
-[Start]
-   ↓
-[Initialize System]
-   ↓
-[Play Voice + Show Logo]
-   ↓
-[Enter User Name]
-   ↓
-{Is Name Empty?}
-   ├── Yes → [Set Name = "User"]
-   └── No  → [Use Entered Name]
-   ↓
-[Welcome User]
-   ↓
-[Show Example Questions]
-   ↓
-[Enter Chatbot]
-   ↓
- ┌───────────────────────────────┐
- │        CHAT LOOP              │
- │                               │
- │  [Ask for Input]              │
- │        ↓                      │
- │  {Input Empty?}               │
- │   ├─ Yes → "Try again"        │
- │   └─ No                       │
- │        ↓                      │
- │  {Recognized Keyword?}        │
- │   ├─ Yes → Give Answer        │
- │   └─ No  → Default Response   │
- │        ↓                      │
- │  {User typed "exit"?}         │
- │   ├─ No → Repeat Loop         │
- │   └─ Yes → Exit Loop          │
- └───────────────────────────────┘
-   ↓
-[Goodbye Message]
-   ↓
-[End]
+name: .NET Console App Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release
+
+      - name: Run application
+        run: dotnet run
